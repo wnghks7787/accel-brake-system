@@ -34,12 +34,22 @@ void Vehicle::gainSpeed()
     {
         speed += SPEED;
     }
+
+    if(speed > MAX_SPEED)
+    {
+        speed = MAX_SPEED;
+    }
 }
 void Vehicle::lossSpeed()
 {
-    if(speed <= STOP)
+    if(speed > STOP)
     {
         speed -= SPEED;
+    }
+
+    if(speed < STOP)
+    {
+        speed = STOP;
     }
 }
 
