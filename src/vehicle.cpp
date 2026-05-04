@@ -10,6 +10,11 @@ Vehicle::Vehicle()
     state = VehicleState::CREEP;
 }
 
+Vehicle::~Vehicle()
+{
+
+}
+
 void Vehicle::setSpeed(int32_t speed)
 {
     this->speed = speed;
