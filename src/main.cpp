@@ -47,6 +47,10 @@ int main()
 		{
 			vehicle.setState(VehicleState::BRAKE);
 		}
+		else if(digitalRead(GPIO_BRAKE_PIN) == BUTTON_OFF)
+		{
+			vehicle.setState(VehicleState::CREEP);
+		}
 	}
 	
 	return 0;
