@@ -7,7 +7,7 @@ BUILDDIR = build
 
 TARGET = accel-brake-system
 SRCS = $(SRCDIR)/main.cpp $(SRCDIR)/vehicle.cpp
-OBJS = $(SRCS: $(SRCDIR)/%.cpp=$(BUILDDIR)/%.o)
+OBJS = $(SRCS:$(SRCDIR)/%.cpp=$(BUILDDIR)/%.o)
 
 all:$(TARGET)
 
