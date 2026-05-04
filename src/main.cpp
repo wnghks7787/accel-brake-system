@@ -45,7 +45,7 @@ int main()
 
 		if(digitalRead(GPIO_BRAKE_PIN) == BUTTON_ON)
 		{
-			vehicle.setSpeed(VehicleState::BRAKE);
+			vehicle.setState(VehicleState::BRAKE);
 		}
 	}
 	
