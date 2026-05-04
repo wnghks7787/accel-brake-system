@@ -7,6 +7,11 @@
 #define GPIO_BRAKE_PIN 28
 #define GPIO_BRAKE_LED_PIN 29
 
+#define LED_ON 1
+#define LED_OFF 0
+#define BUTTON_ON 1
+#define BUTTON_OFF 0
+
 int main()
 {
 	// wiringPi 초기화
@@ -29,7 +34,19 @@ int main()
 	Vehicle& vehicle = Vehicle::getInstance();
 	while(1)
 	{
-		
+		if(vehicle.getState() == VehicleState::BRAKE)
+		{
+			digitalWrite(GPIO_BRAKE_LED_PIN, LED_ON);
+		}
+		else
+		{
+			digitalWrite(GPIO_BRAKE_LED_PIN, LED_OFF);
+		}
+
+		if(digitalRead(GPIO_BRAKE_PIN) == BUTTON_ON)
+		{
+			vehicle.setSpeed(VehicleState::BRAKE);
+		}
 	}
 	
 	return 0;
