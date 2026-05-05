@@ -17,7 +17,6 @@
 
 int main()
 {	
-	PeriodicTimer timer(2000U);
 	PeriodicTimer physicsTimer(100U);
 	// wiringPi 초기화
 	int32_t retVal = wiringPiSetup();
@@ -66,6 +65,7 @@ int main()
 					digitalWrite(GPIO_BRAKE_LED_PIN, LED_OFF);
 					break;
 			}
+			std::cout << "\r\033[K현재 속력: " << vehicle.getSpeed() << " km/h" << std::flush;
 		}
 
 		if(digitalRead(GPIO_BRAKE_PIN) == BUTTON_ON)
@@ -80,12 +80,6 @@ int main()
 		if(digitalRead(GPIO_ACCEL_PIN) == BUTTON_ON)
 		{
 			vehicle.setState(VehicleState::ACCEL);
-		}
-
-
-		if(timer.isReady())
-		{
-			std::cout << "\r\033[K현재 속력: " << vehicle.getSpeed() << " km/h" << std::flush;
 		}
 	}
 	
