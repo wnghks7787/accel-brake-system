@@ -1,6 +1,6 @@
 #include "vehicle.h"
 
-#define SPEED (1)
+#define SPEED (3)
 #define STOP (0)
 #define MAX_SPEED (200)
 
@@ -45,11 +45,11 @@ void Vehicle::gainSpeed()
         speed = MAX_SPEED;
     }
 }
-void Vehicle::lossSpeed()
+void Vehicle::lossSpeed(int32_t loss_speed = SPEED)
 {
     if(speed > STOP)
     {
-        speed -= SPEED;
+        speed -= loss_speed;
     }
 
     if(speed < STOP)
