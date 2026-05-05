@@ -4,6 +4,10 @@
 #include <iostream>
 #include "vehicle_state.h"
 
+#define SPEED (3)
+#define STOP (0)
+#define MAX_SPEED (200)
+
 class Vehicle
 {
 private:

@@ -1,9 +1,5 @@
 #include "vehicle.h"
 
-#define SPEED (3)
-#define STOP (0)
-#define MAX_SPEED (200)
-
 Vehicle::Vehicle()
 {
     speed = STOP;
