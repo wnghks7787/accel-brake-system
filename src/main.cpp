@@ -85,7 +85,7 @@ int main()
 
 		if(timer.isReady())
 		{
-			std::cout << "\033[K\r현재 속력: " << vehicle.getSpeed() << "km/h";
+			std::cout << "\r\033[K현재 속력: " << vehicle.getSpeed() << " km/h" << std::flush;
 		}
 	}
 	
