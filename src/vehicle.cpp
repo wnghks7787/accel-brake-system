@@ -41,7 +41,7 @@ void Vehicle::gainSpeed()
         speed = MAX_SPEED;
     }
 }
-void Vehicle::lossSpeed(int32_t loss_speed = SPEED)
+void Vehicle::lossSpeed(int32_t loss_speed)
 {
     if(speed > STOP)
     {

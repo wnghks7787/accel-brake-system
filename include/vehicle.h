@@ -29,7 +29,7 @@ public:
     VehicleState getState();
 
     void gainSpeed();
-    void lossSpeed(int32_t loss_speed);
+    void lossSpeed(int32_t loss_speed = SPEED);
 
     static Vehicle& getInstance();
 
