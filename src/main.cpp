@@ -18,6 +18,7 @@
 int main()
 {	
 	PeriodicTimer physicsTimer(100U);
+	PeriodicTimer creepTimer(500U);
 	// wiringPi 초기화
 	int32_t retVal = wiringPiSetup();
 	if(retVal == -1)
@@ -55,14 +56,18 @@ int main()
 
 				case VehicleState::CREEP:
 					digitalWrite(GPIO_BRAKE_LED_PIN, LED_OFF);
-					if(vehicle.getSpeed() > 5)
+					if(creepTimer.isReady())
 					{
-						vehicle.lossSpeed(1);
+						if(vehicle.getSpeed() > 5)
+						{
+							vehicle.lossSpeed(1);
+						}
+						else
+						{
+							vehicle.gainSpeed();
+						}
 					}
-					else
-					{
-						vehicle.gainSpeed();
-					}
+
 					break;
 
 				case VehicleState::FAULT:
