@@ -6,7 +6,7 @@ SRCDIR = src
 BUILDDIR = build
 
 TARGET = accel-brake-system
-SRCS = $(SRCDIR)/main.cpp $(SRCDIR)/vehicle.cpp
+SRCS = $(SRCDIR)/main.cpp $(SRCDIR)/vehicle.cpp $(SRCDIR)/periodic_timer.cpp
 OBJS = $(SRCS:$(SRCDIR)/%.cpp=$(BUILDDIR)/%.o)
 
 all:$(TARGET)
