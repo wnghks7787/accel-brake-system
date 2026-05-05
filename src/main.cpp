@@ -1,19 +1,23 @@
 #include <wiringPi.h>
 #include <iostream>
+
 #include "vehicle.h"
 #include "vehicle_state.h"
+#include "periodic_timer.h"
 
-#define GPIO_ACCEL_PIN 27
-#define GPIO_BRAKE_PIN 28
-#define GPIO_BRAKE_LED_PIN 29
 
-#define LED_ON 1
-#define LED_OFF 0
-#define BUTTON_ON 1
-#define BUTTON_OFF 0
+#define GPIO_ACCEL_PIN (27)
+#define GPIO_BRAKE_PIN (28)
+#define GPIO_BRAKE_LED_PIN (29)
+
+#define LED_ON (1)
+#define LED_OFF (0)
+#define BUTTON_ON (1)
+#define BUTTON_OFF (0)
 
 int main()
-{
+{	
+	PeriodicTimer timer(2000U);
 	// wiringPi 초기화
 	int32_t retVal = wiringPiSetup();
 	if(retVal == -1)
@@ -32,7 +36,7 @@ int main()
 	// 실행
 	std::cout << "실행 시작" << std::endl;
 	Vehicle& vehicle = Vehicle::getInstance();
-	while(1)
+	while(true)
 	{
 		if(vehicle.getState() == VehicleState::BRAKE)
 		{
@@ -50,6 +54,12 @@ int main()
 		else if(digitalRead(GPIO_BRAKE_PIN) == BUTTON_OFF)
 		{
 			vehicle.setState(VehicleState::CREEP);
+		}
+
+
+		if(timer.isReady())
+		{
+			std::cout << "속도 출력" << std::endl;
 		}
 	}
 	
