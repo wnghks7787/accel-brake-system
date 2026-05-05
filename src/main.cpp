@@ -38,13 +38,30 @@ int main()
 	Vehicle& vehicle = Vehicle::getInstance();
 	while(true)
 	{
-		if(vehicle.getState() == VehicleState::BRAKE)
+		// LED 상태
+		switch(vehicle.getState())
 		{
-			digitalWrite(GPIO_BRAKE_LED_PIN, LED_ON);
-		}
-		else
-		{
-			digitalWrite(GPIO_BRAKE_LED_PIN, LED_OFF);
+			case VehicleState::BRAKE:
+				digitalWrite(GPIO_BRAKE_LED_PIN, LED_ON);
+				vehicle.lossSpeed();
+				break;
+
+			case VehicleState::ACCEL:
+				digitalWrite(GPIO_BRAKE_LED_PIN, LED_OFF);
+				vehicle.gainSpeed();
+				break;
+
+			case VehicleState::CREEP:
+				digitalWrite(GPIO_BRAKE_LED_PIN, LED_OFF);
+				break;
+
+			case VehicleState::FAULT:
+				digitalWrite(GPIO_BRAKE_LED_PIN, LED_OFF);
+				break;
+
+			default:
+				digitalWrite(GPIO_BRAKE_LED_PIN, LED_OFF);
+				break;
 		}
 
 		if(digitalRead(GPIO_BRAKE_PIN) == BUTTON_ON)
@@ -55,11 +72,16 @@ int main()
 		{
 			vehicle.setState(VehicleState::CREEP);
 		}
+		
+		if(digitalRead(GPIO_ACCEL_PIN) == BUTTON_ON)
+		{
+			vehicle.setState(VehicleState::ACCEL);
+		}
 
 
 		if(timer.isReady())
 		{
-			std::cout << "속도 출력" << std::endl;
+			std::cout << "현재 속력: " << vehicle.getSpeed() << std::endl;
 		}
 	}
 	
