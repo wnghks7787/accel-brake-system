@@ -58,11 +58,11 @@ int main()
 					digitalWrite(GPIO_BRAKE_LED_PIN, LED_OFF);
 					if(creepTimer.isReady())
 					{
-						if(vehicle.getSpeed() > 5)
+						if(vehicle.getSpeed() > 7)
 						{
 							vehicle.lossSpeed(1);
 						}
-						else
+						else if(vehicle.getSpeed() < 4)
 						{
 							vehicle.gainSpeed();
 						}
