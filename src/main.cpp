@@ -18,6 +18,7 @@
 int main()
 {	
 	PeriodicTimer timer(2000U);
+	PeriodicTimer physicsTimer(100U);
 	// wiringPi 초기화
 	int32_t retVal = wiringPiSetup();
 	if(retVal == -1)
@@ -39,29 +40,32 @@ int main()
 	while(true)
 	{
 		// LED 상태
-		switch(vehicle.getState())
+		if(physicsTimer.isReady())
 		{
-			case VehicleState::BRAKE:
-				digitalWrite(GPIO_BRAKE_LED_PIN, LED_ON);
-				vehicle.lossSpeed();
-				break;
+			switch(vehicle.getState())
+			{
+				case VehicleState::BRAKE:
+					digitalWrite(GPIO_BRAKE_LED_PIN, LED_ON);
+					vehicle.lossSpeed();
+					break;
 
-			case VehicleState::ACCEL:
-				digitalWrite(GPIO_BRAKE_LED_PIN, LED_OFF);
-				vehicle.gainSpeed();
-				break;
+				case VehicleState::ACCEL:
+					digitalWrite(GPIO_BRAKE_LED_PIN, LED_OFF);
+					vehicle.gainSpeed();
+					break;
 
-			case VehicleState::CREEP:
-				digitalWrite(GPIO_BRAKE_LED_PIN, LED_OFF);
-				break;
+				case VehicleState::CREEP:
+					digitalWrite(GPIO_BRAKE_LED_PIN, LED_OFF);
+					break;
 
-			case VehicleState::FAULT:
-				digitalWrite(GPIO_BRAKE_LED_PIN, LED_OFF);
-				break;
+				case VehicleState::FAULT:
+					digitalWrite(GPIO_BRAKE_LED_PIN, LED_OFF);
+					break;
 
-			default:
-				digitalWrite(GPIO_BRAKE_LED_PIN, LED_OFF);
-				break;
+				default:
+					digitalWrite(GPIO_BRAKE_LED_PIN, LED_OFF);
+					break;
+			}
 		}
 
 		if(digitalRead(GPIO_BRAKE_PIN) == BUTTON_ON)
@@ -81,7 +85,7 @@ int main()
 
 		if(timer.isReady())
 		{
-			std::cout << "현재 속력: " << vehicle.getSpeed() << std::endl;
+			std::cout << "현재 속력: " << vehicle.getSpeed() << "km/h" << std::endl;
 		}
 	}
 	

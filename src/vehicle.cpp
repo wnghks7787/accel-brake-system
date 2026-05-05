@@ -1,6 +1,6 @@
 #include "vehicle.h"
 
-#define SPEED (5)
+#define SPEED (1)
 #define STOP (0)
 #define MAX_SPEED (200)
 
