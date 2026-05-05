@@ -55,7 +55,7 @@ int main()
 
 				case VehicleState::CREEP:
 					digitalWrite(GPIO_BRAKE_LED_PIN, LED_OFF);
-					if(vehicle.getSpeed > 5)
+					if(vehicle.getSpeed() > 5)
 					{
 						vehicle.lossSpeed(1);
 					}
